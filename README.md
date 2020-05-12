@@ -34,14 +34,18 @@ A whole lot of code was lifted from freedv-dev for this program.
 
 # Building and Installation
 
-1. Dependancies:
+## Dependancies:
+
+Install the build dependancies.
+
    ```
-   sudo apt-get install git cmake sox libsamplerate0-dev portaudio19-dev libsndfile1-dev```
+   sudo apt-get install git cmake sox libsamplerate0-dev portaudio19-dev libsndfile1-dev
    ```
    
-1. Building Method 1 - installs codec 2 libraries on your system:
+## Building Method 1 - Install codec 2 libraries on your system:
 
-   Install codec2-dev:
+1. Build and install codec2-dev.
+
     ```
     git clone https://github.com/drowe67/codec2.git
     cd codec2-dev
@@ -60,7 +64,8 @@ A whole lot of code was lifted from freedv-dev for this program.
     ldconfig -v | grep codec2
     ```
     
-    Build FreeBeacon:
+1. Build FreeBeacon:
+
     ```
     git clone https://github.com/drowe67/freebeacon.git
     cd freebeacon
@@ -70,61 +75,67 @@ A whole lot of code was lifted from freedv-dev for this program.
     make
     ```
 
-1. Building Method 2 - without system wide codec 2 installation
+## Building Method 2 - without system wide codec 2 installation
+
+1. Build codec2.
+
    ```
    git clone https://github.com/drowe67/codec2.git
    cd codec2-dev && mkdir build_linux && cd build_linux
    cmake ../ && make
    ```
 
-   Instruct freebeacon cmake to use local codec2 directory:
+1. Instruct freebeacon cmake to use local codec2 directory.
      ```
     git clone https://github.com/drowe67/freebeacon.git
     cd freebeacon && mkdir build_linux cd build_linux
     cmake -DCODEC2_BUILD_DIR=~/codec2/build_linux ..
     make
-    ```
-  
-1. Testing:
+    ``` 
+    
+## Testing
 
-    Plug in your USB sound card and USB RS232 devices.  Use alsamixer
-    to adjust levels on your sound card. F6 lets you select sound cards
+Plug in your USB sound card and USB RS232 devices.  Use alsamixer
+to adjust levels on your sound card. F6 lets you select sound cards
 
-    Usage:
-    ```
-      ./freebeacon -h
-    ```
+
     
-    List sound devices
-    ```
-      ./freebeacon -l
-    ```
-    
-    Example usage:
-    ```
-      ./freebeacon -c /dev/ttyUSB1 --txfilename ~/codec2-dev/wav/vk5qi.wav --dev 4 -v --trigger hello
-    ```
-    
-    Testing your PTT by making it jump straght into tx mode:
+Testing your PTT by making it jump straght into tx mode:
     ```
       ./freebeacon -c /dev/ttyUSB1 --txfilename ~/codec2-dev/wav/vk5qi.wav --dev 4 -v --trigger hello -t
     ```
     
-    Testing sound cards on RPi:
-      ```
-      $ arecord -l
-        
-        **** List of CAPTURE Hardware Devices ****
-        card 1: Audio [RIGblaster Advantage Audio], device 0: USB Audio [USB Audio]
-        Subdevices: 1/1
-        Subdevice #0: subdevice #0
+Testing sound cards on RPi:
+   ```
+   $ arecord -l
 
-      $ arecord -D hw:1,0 -f S16_LE -r 48000 test.wav
-      $ aplay test.wav
-      ```
-      
-    Testing:
+     **** List of CAPTURE Hardware Devices ****
+     card 1: Audio [RIGblaster Advantage Audio], device 0: USB Audio [USB Audio]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
 
-      As a first step try playing freebeacon_test.wav from another PC into the freebeacon machine input, this file has the trigger string "hello" in the txt msg.
+   $ arecord -D hw:1,0 -f S16_LE -r 48000 test.wav
+   $ aplay test.wav
+   ```
 
+Testing:
+
+As a first step try playing freebeacon_test.wav from another PC into the freebeacon machine input, this file has the trigger string "hello" in the txt msg.
+
+## Usage
+
+Usage:
+    ```
+      ./freebeacon -h
+    ```
+    
+List sound devices
+    ```
+      ./freebeacon -l
+    ```
+    
+Example usage:
+    ```
+      ./freebeacon -c /dev/ttyUSB1 --txfilename ~/codec2-dev/wav/vk5qi.wav --dev 4 -v --trigger hello
+    ```
 
