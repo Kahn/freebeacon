@@ -36,7 +36,9 @@ A whole lot of code was lifted from freedv-dev for this program.
 
 ## Dependancies:
 
-Install the build dependancies.
+Install the build tools.
+
+1. Debian based operating systems.
 
    ```
    sudo apt-get install git cmake sox libsamplerate0-dev portaudio19-dev libsndfile1-dev
@@ -59,7 +61,7 @@ Install the build dependancies.
     ld.conf.d directory to match the path the codec2 .so was installed
     in.
 
-    Check it has found libcodec2.so using:
+1. Check it has found libcodec2.so using:
     ```
     ldconfig -v | grep codec2
     ```
@@ -77,7 +79,10 @@ Install the build dependancies.
 
 ## Building Method 2 - without system wide codec 2 installation
 
-1. Build codec2.
+If you don't want to have codec2 installed system wide use this
+process.
+
+1. Build codec2 without installing.
 
    ```
    git clone https://github.com/drowe67/codec2.git
@@ -98,8 +103,6 @@ Install the build dependancies.
 Plug in your USB sound card and USB RS232 devices.  Use alsamixer
 to adjust levels on your sound card. F6 lets you select sound cards
 
-
-    
 Testing your PTT by making it jump straght into tx mode:
     ```
       ./freebeacon -c /dev/ttyUSB1 --txfilename ~/codec2-dev/wav/vk5qi.wav --dev 4 -v --trigger hello -t
@@ -117,8 +120,6 @@ Testing sound cards on RPi:
    $ arecord -D hw:1,0 -f S16_LE -r 48000 test.wav
    $ aplay test.wav
    ```
-
-Testing:
 
 As a first step try playing freebeacon_test.wav from another PC into the freebeacon machine input, this file has the trigger string "hello" in the txt msg.
 
