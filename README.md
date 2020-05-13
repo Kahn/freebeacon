@@ -34,7 +34,7 @@ A whole lot of code was lifted from freedv-dev for this program.
 
 # Building and Installation
 
-## Dependancies:
+## Dependencies:
 
 Install the build tools.
 
